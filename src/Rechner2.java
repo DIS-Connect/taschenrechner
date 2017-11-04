@@ -246,57 +246,8 @@ public class Rechner2 extends JFrame {
 			responseFunktion(Double.toString(ergebnisZ));
 
 		} else if (hi) {
-			switch (op2) {
-			case 0:
-				ergebnisZ = 1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 1:
-				ergebnisZ = op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 2:
-				ergebnisZ = op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 3:
-				ergebnisZ = op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 4:
-				ergebnisZ = op1 * op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 5:
-				ergebnisZ = op1 * op1 * op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 6:
-				ergebnisZ = op1 * op1 * op1 * op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 7:
-				ergebnisZ = op1 * op1 * op1 * op1 * op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 8:
-				ergebnisZ = op1 * op1 * op1 * op1 * op1 * op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 9:
-				ergebnisZ = op1 * op1 * op1 * op1 * op1 * op1 * op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-			case 10:
-				ergebnisZ = op1 * op1 * op1 * op1 * op1 * op1 * op1 * op1 * op1 * op1;
-				responseFunktion(Double.toString(ergebnisZ));
-				break;
-
-			default:
-				responseFunktion("Es ist nicht möglich, dass der Exponent höher als 10 ist!");
-				break;
-			}
-
+			ergebnisZ = Math.pow(op1, op2);
+			responseFunktion(Double.toString(ergebnisZ));
 		}
 
 		else if (wurzel) {
