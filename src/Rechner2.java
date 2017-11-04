@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 
 public class Rechner2 extends JFrame {
 
@@ -240,7 +241,7 @@ public class Rechner2 extends JFrame {
 				responseFunktion(Double.toString(ergebnisZ));
 			} else if ((Integer.parseInt(fOperant2.getText()) == 0)) {
 				responseFunktion("Stell dir vor, du hast " + fOperant1.getText()
-						+ " Kekse und verteile sie gleichmÃ¤ÃŸig auf " + fOperant2.getText()
+						+ " Kekse und verteile sie gleichmäßig auf " + fOperant2.getText()
 						+ " Freunde. Wie viele Kekse bekommt jeder? Siehst du? Das macht keinen Sinn! Und du bist traurig weil du keine Freunde hast");
 			}
 		}
@@ -288,6 +289,14 @@ public class Rechner2 extends JFrame {
 		
 		
 	}
+	  public void keepInput_StateChanged(ChangeEvent evt) {
+		 
+		  } 
+
+		  public void keepInput_ItemStateChanged(ItemEvent evt) {
+		 
+		    System.out.println("hallo");
+		  }
 		
 
 } // end of class Rechner2
