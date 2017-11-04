@@ -210,7 +210,7 @@ public class Rechner2 extends JFrame {
 	}// end of teilKnopf_ActionPerformed
 
 	public void wurzelKnopf_ActionPerformed(ActionEvent evt) {
-		operator.setText("√");
+		operator.setText("âˆš");
 		teil = false;
 		plus = false;
 		minus = false;
@@ -240,7 +240,7 @@ public class Rechner2 extends JFrame {
 				responseFunktion(Double.toString(ergebnisZ));
 			} else if ((Integer.parseInt(fOperant2.getText()) == 0)) {
 				responseFunktion("Stell dir vor, du hast " + fOperant1.getText()
-						+ " Kekse und verteile sie gleichmäßig auf " + fOperant2.getText()
+						+ " Kekse und verteile sie gleichmÃ¤ÃŸig auf " + fOperant2.getText()
 						+ " Freunde. Wie viele Kekse bekommt jeder? Siehst du? Das macht keinen Sinn! Und du bist traurig weil du keine Freunde hast");
 			}
 		}
