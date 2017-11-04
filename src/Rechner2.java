@@ -20,7 +20,8 @@ public class Rechner2 extends JFrame {
 	private boolean mal;
 	private boolean teil;
 	private boolean hi;
-
+	private JCheckBox keepInput = new JCheckBox();
+	
 	private JButton wurzelKnopf = new JButton();
 	private boolean wurzel;
 
@@ -28,7 +29,7 @@ public class Rechner2 extends JFrame {
 
 		super();
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		int frameWidth = 400;
+		int frameWidth = 500;
 		int frameHeight = 300;
 		setSize(frameWidth, frameHeight);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -125,7 +126,11 @@ public class Rechner2 extends JFrame {
 		});
 		wurzelKnopf.setFont(new Font("Dialog", Font.BOLD, 18));
 		cp.add(wurzelKnopf);
-
+		
+		keepInput.setBounds(350, 45, 89, 30);
+	    keepInput.setOpaque(false);
+	    keepInput.setText("keep input");
+	    cp.add(keepInput);
 		// Ende Komponenten
 
 		setVisible(true);
@@ -309,16 +314,29 @@ public class Rechner2 extends JFrame {
 
 				ergebnisZ = Math.cbrt(op2);
 				responseFunktion(Double.toString(ergebnisZ));
-			}
+			
 		}
+			
+		
 
-		{
-
-			fOperant1.setText("");
-			fOperant2.setText("");
-			operator.setText("");
+	
+}
+		
+		fOperant1.setText("");
+		fOperant2.setText("");
+		operator.setText("");
+			
 		}
+		
 		// Ende Methoden
+	
+	public void keepInput_ActionPerformed(ActionEvent evt) {
+		
+		fOperant1.setText("");
+		fOperant2.setText("");
+		
+		
 	}
+		
 
 } // end of class Rechner2
