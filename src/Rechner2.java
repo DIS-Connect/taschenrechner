@@ -22,7 +22,8 @@ public class Rechner2 extends JFrame {
 	private boolean teil;
 	private boolean hi;
 	private JCheckBox keepInput = new JCheckBox();
-	
+	private JRadioButton keepresult2 = new JRadioButton();
+	  private JRadioButton keepresult1 = new JRadioButton();
 	private JButton wurzelKnopf = new JButton();
 	private boolean wurzel;
 
@@ -30,7 +31,7 @@ public class Rechner2 extends JFrame {
 
 		super();
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		int frameWidth = 500;
+		int frameWidth = 550;
 		int frameHeight = 300;
 		setSize(frameWidth, frameHeight);
 		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -125,6 +126,14 @@ public class Rechner2 extends JFrame {
 
 			}
 		});
+		keepresult2.setBounds(350, 115, 140, 30);
+		keepresult2.setOpaque(false);
+		keepresult2.setText("keep result in field 2");
+	    cp.add(keepresult2);
+	    keepresult1.setBounds(350, 85, 140, 30);
+	    keepresult1.setOpaque(false);
+	    keepresult1.setText("keep result in field 1");
+	    cp.add(keepresult1);
 		wurzelKnopf.setFont(new Font("Dialog", Font.BOLD, 18));
 		cp.add(wurzelKnopf);
 		
@@ -262,6 +271,17 @@ public class Rechner2 extends JFrame {
 				responseFunktion(Double.toString(ergebnisZ));
 
 			}
+			if(keepresult1.isSelected()) {
+				fOperant1.setText(Double.toString(ergebnisZ));
+				keepresult2.setOpaque(false);
+				fOperant1.setOpaque(false);
+			}
+			else if (keepresult2.isSelected()) {
+	//			fOperant2.setText(Double.toString(ergebnisZ));
+				fOperant2.setText("23");
+			keepresult1.setOpaque(false);
+			fOperant2.setOpaque(false);
+			}	
 
 		}
 		if ( !keepInput.isSelected() ) {
