@@ -228,75 +228,49 @@ public class Rechner2 extends JFrame {
 
 		op1 = Integer.parseInt(fOperant1.getText());
 		op2 = Integer.parseInt(fOperant2.getText());
-		if (plus) {
+		if ( plus ) {
 
 			ergebnisZ = op1 + op2;
 			responseFunktion(Double.toString(ergebnisZ));
-		} else if (minus) {
+		} else if ( minus ) {
 			ergebnisZ = op1 - op2;
 			responseFunktion(Double.toString(ergebnisZ));
-		} else if (teil) {
-			if (!(Integer.parseInt(fOperant2.getText()) == 0)) {
+		} else if ( teil ) {
+			if ( !(Integer.parseInt(fOperant2.getText()) == 0) ) {
 				ergebnisZ = op1 / op2;
 				responseFunktion(Double.toString(ergebnisZ));
-			} else if ((Integer.parseInt(fOperant2.getText()) == 0)) {
-				responseFunktion("Stell dir vor, du hast " + fOperant1.getText()
-						+ " Kekse und verteile sie gleichmäßig auf " + fOperant2.getText()
-						+ " Freunde. Wie viele Kekse bekommt jeder? Siehst du? Das macht keinen Sinn! Und du bist traurig weil du keine Freunde hast");
+			} else if ( (Integer.parseInt(fOperant2.getText()) == 0) ) {
+				responseFunktion("Stell dir vor, du hast " + fOperant1.getText() + " Kekse und verteile sie gleichmäßig auf " + fOperant2.getText() + " Freunde. Wie viele Kekse bekommt jeder? Siehst du? Das macht keinen Sinn! Und du bist traurig weil du keine Freunde hast");
 			}
-		}
-
-		else if (mal) {
-			if (!(Integer.parseInt(fOperant1.getText()) == 0 || Integer.parseInt(fOperant2.getText()) == 0))
+		} else if ( mal ) {
+			if ( !(Integer.parseInt(fOperant1.getText()) == 0 || Integer.parseInt(fOperant2.getText()) == 0) )
 				ergebnisZ = op1 * op2;
 			responseFunktion(Double.toString(ergebnisZ));
 
-		} else if (hi) {
+		} else if ( hi ) {
 			ergebnisZ = Math.pow(op1, op2);
 			responseFunktion(Double.toString(ergebnisZ));
-		}
+		} else if ( wurzel ) {
 
-		else if (wurzel) {
-
-			if (op1 == 2) {
+			if ( op1 == 2 ) {
 
 				ergebnisZ = Math.sqrt(op2);
 				responseFunktion(Double.toString(ergebnisZ));
-			} else if (op1 == 3) {
+			} else if ( op1 == 3 ) {
 
 				ergebnisZ = Math.cbrt(op2);
 				responseFunktion(Double.toString(ergebnisZ));
-			
-		}
-			
-		
 
-	
-}
-		
-		fOperant1.setText("");
-		fOperant2.setText("");
-		operator.setText("");
-			
+			}
+
 		}
+		if ( !keepInput.isSelected() ) {
+			fOperant1.setText("");
+			fOperant2.setText("");
+			operator.setText("");
+		}
+
+	}
 		
 		// Ende Methoden
-	
-	public void keepInput_ActionPerformed(ActionEvent evt) {
-		
-		fOperant1.setText("");
-		fOperant2.setText("");
-		
-		
-	}
-	  public void keepInput_StateChanged(ChangeEvent evt) {
-		 
-		  } 
-
-		  public void keepInput_ItemStateChanged(ItemEvent evt) {
-		 
-		    System.out.println("hallo");
-		  }
-		
-
 } // end of class Rechner2
