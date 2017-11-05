@@ -34,7 +34,7 @@ public class Rechner2 extends JFrame {
 	public Rechner2() {
 
 		super();
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		int frameWidth = 550;
 		int frameHeight = 300;
 		setSize(frameWidth, frameHeight);
