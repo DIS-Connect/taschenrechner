@@ -28,6 +28,8 @@ public class Rechner2 extends JFrame {
     private ButtonGroup keepRadioGroup = new ButtonGroup();
 	private JButton wurzelKnopf = new JButton();
 	private boolean wurzel;
+	private JRadioButton keepresult = new JRadioButton();
+	private JTextField ergebnisFeld = new JTextField();
 
 	public Rechner2() {
 
@@ -134,6 +136,7 @@ public class Rechner2 extends JFrame {
         keepresult2.setActionCommand("2");
 	    cp.add(keepresult2);
         keepRadioGroup.add(keepresult2);
+        
         keepresult1.setBounds(350, 100, 180, 25);
 	    keepresult1.setOpaque(false);
 	    keepresult1.setText("keep result in field 1");
@@ -145,18 +148,29 @@ public class Rechner2 extends JFrame {
 		
 		keepInput.setBounds(350, 50, 180, 25);
 	    keepInput.setOpaque(false);
-        keepInput.setActionCommand("keepInput");
+        keepInput.setActionCommand("keep Input");
 	    keepInput.setText("keep input");
 	    cp.add(keepInput);
         keepRadioGroup.add(keepInput);
 
         keepNothing.setBounds(350, 75, 180, 25);
         keepNothing.setOpaque(false);
-        keepNothing.setActionCommand("keepNothing");
+        keepNothing.setActionCommand("3");
         keepNothing.setText("keep nothing");
         keepNothing.setSelected(true);
         cp.add(keepNothing);
         keepRadioGroup.add(keepNothing);
+        
+        keepresult.setBounds(350, 150, 180, 25);
+        keepresult.setOpaque(false);
+        keepresult.setActionCommand("4");
+        keepresult.setText("keep result");
+        keepresult.setSelected(true);
+        cp.add(keepresult);
+        keepRadioGroup.add(keepresult);
+        
+         ergebnisFeld.setBounds(350, 175, 90, 40);
+		cp.add(ergebnisFeld);
 		// Ende Komponenten
 
 		setVisible(true);
@@ -298,12 +312,18 @@ public class Rechner2 extends JFrame {
             fOperant2.setText(Double.toString(ergebnisZ));
             fOperant1.setText("");
             operator.setText("");
-        } else if (!(keepRadioGroup.getSelection().getActionCommand() == "keepInput")) {
+        } else if ((keepRadioGroup.getSelection().getActionCommand() == "3")) {
             fOperant1.setText("");
             fOperant2.setText("");
             operator.setText("");
         }
-
+        else if ((keepRadioGroup.getSelection().getActionCommand() == "4")) {
+        	
+        	ergebnisFeld.setText(Double.toString(ergebnisZ));
+        	fOperant1.setText("");
+            fOperant2.setText("");
+            operator.setText("");
+        }
 	}
 		
 		// Ende Methoden
