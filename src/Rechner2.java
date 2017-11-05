@@ -21,9 +21,11 @@ public class Rechner2 extends JFrame {
 	private boolean mal;
 	private boolean teil;
 	private boolean hi;
-	private JCheckBox keepInput = new JCheckBox();
+	private JRadioButton keepInput = new JRadioButton();
+    private JRadioButton keepNothing = new JRadioButton();
 	private JRadioButton keepresult2 = new JRadioButton();
-	  private JRadioButton keepresult1 = new JRadioButton();
+    private JRadioButton keepresult1 = new JRadioButton();
+    private ButtonGroup keepRadioGroup = new ButtonGroup();
 	private JButton wurzelKnopf = new JButton();
 	private boolean wurzel;
 
@@ -126,21 +128,35 @@ public class Rechner2 extends JFrame {
 
 			}
 		});
-		keepresult2.setBounds(350, 115, 140, 30);
+		keepresult2.setBounds(350, 125, 180, 25);
 		keepresult2.setOpaque(false);
 		keepresult2.setText("keep result in field 2");
+        keepresult2.setActionCommand("2");
 	    cp.add(keepresult2);
-	    keepresult1.setBounds(350, 85, 140, 30);
+        keepRadioGroup.add(keepresult2);
+        keepresult1.setBounds(350, 100, 180, 25);
 	    keepresult1.setOpaque(false);
 	    keepresult1.setText("keep result in field 1");
+        keepresult1.setActionCommand("1");
+        keepRadioGroup.add(keepresult1);
 	    cp.add(keepresult1);
 		wurzelKnopf.setFont(new Font("Dialog", Font.BOLD, 18));
 		cp.add(wurzelKnopf);
 		
-		keepInput.setBounds(350, 45, 89, 30);
+		keepInput.setBounds(350, 50, 180, 25);
 	    keepInput.setOpaque(false);
+        keepInput.setActionCommand("keepInput");
 	    keepInput.setText("keep input");
 	    cp.add(keepInput);
+        keepRadioGroup.add(keepInput);
+
+        keepNothing.setBounds(350, 75, 180, 25);
+        keepNothing.setOpaque(false);
+        keepNothing.setActionCommand("keepNothing");
+        keepNothing.setText("keep nothing");
+        keepNothing.setSelected(true);
+        cp.add(keepNothing);
+        keepRadioGroup.add(keepNothing);
 		// Ende Komponenten
 
 		setVisible(true);
@@ -231,12 +247,12 @@ public class Rechner2 extends JFrame {
 	}
 
 	public void ergebnis_ActionPerformed(ActionEvent evt) {
-		int op1;
-		int op2;
+		double op1;
+		double op2;
 		double ergebnisZ = 0;
 
-		op1 = Integer.parseInt(fOperant1.getText());
-		op2 = Integer.parseInt(fOperant2.getText());
+		op1 = Double.parseDouble(fOperant1.getText());
+		op2 = Double.parseDouble(fOperant2.getText());
 		if ( plus ) {
 
 			ergebnisZ = op1 + op2;
@@ -245,14 +261,14 @@ public class Rechner2 extends JFrame {
 			ergebnisZ = op1 - op2;
 			responseFunktion(Double.toString(ergebnisZ));
 		} else if ( teil ) {
-			if ( !(Integer.parseInt(fOperant2.getText()) == 0) ) {
+			if ( !(Double.parseDouble(fOperant2.getText()) == 0) ) {
 				ergebnisZ = op1 / op2;
 				responseFunktion(Double.toString(ergebnisZ));
-			} else if ( (Integer.parseInt(fOperant2.getText()) == 0) ) {
+			} else if ( (Double.parseDouble(fOperant2.getText()) == 0) ) {
 				responseFunktion("Stell dir vor, du hast " + fOperant1.getText() + " Kekse und verteile sie gleichmäßig auf " + fOperant2.getText() + " Freunde. Wie viele Kekse bekommt jeder? Siehst du? Das macht keinen Sinn! Und du bist traurig weil du keine Freunde hast");
 			}
 		} else if ( mal ) {
-			if ( !(Integer.parseInt(fOperant1.getText()) == 0 || Integer.parseInt(fOperant2.getText()) == 0) )
+			if ( !(Double.parseDouble(fOperant1.getText()) == 0 || Double.parseDouble(fOperant2.getText()) == 0) )
 				ergebnisZ = op1 * op2;
 			responseFunktion(Double.toString(ergebnisZ));
 
@@ -271,24 +287,22 @@ public class Rechner2 extends JFrame {
 				responseFunktion(Double.toString(ergebnisZ));
 
 			}
-			if(keepresult1.isSelected()) {
-				fOperant1.setText(Double.toString(ergebnisZ));
-				keepresult2.setOpaque(false);
-				fOperant1.setOpaque(false);
-			}
-			else if (keepresult2.isSelected()) {
-	//			fOperant2.setText(Double.toString(ergebnisZ));
-				fOperant2.setText("23");
-			keepresult1.setOpaque(false);
-			fOperant2.setOpaque(false);
-			}	
 
 		}
-		if ( !keepInput.isSelected() ) {
-			fOperant1.setText("");
-			fOperant2.setText("");
-			operator.setText("");
-		}
+        if (keepRadioGroup.getSelection().getActionCommand() == "1") {
+            fOperant1.setText(Double.toString(ergebnisZ));
+            System.out.println(Double.toString(ergebnisZ));
+            fOperant2.setText("");
+            operator.setText("");
+        } else if (keepRadioGroup.getSelection().getActionCommand() == "2") {
+            fOperant2.setText(Double.toString(ergebnisZ));
+            fOperant1.setText("");
+            operator.setText("");
+        } else if (!(keepRadioGroup.getSelection().getActionCommand() == "keepInput")) {
+            fOperant1.setText("");
+            fOperant2.setText("");
+            operator.setText("");
+        }
 
 	}
 		
