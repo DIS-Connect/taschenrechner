@@ -1,9 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
 
-public class Rechner1 extends JFrame {
+public class Simple extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +31,7 @@ public class Rechner1 extends JFrame {
 	private JTextField ergebnisFeld = new JTextField();
 	private JPanel simple = new JPanel();
 
-	public Rechner1() {
+	public Simple() {
 
 		super();
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -43,7 +42,7 @@ public class Rechner1 extends JFrame {
 		int x = (d.width - getSize().width) / 2;
 		int y = (d.height - getSize().height) / 2;
 		setLocation(x, y);
-		setTitle("Rechner2");
+		setTitle("Advanced");
 		setResizable(false);
 	
 		simple.setLayout(null);
@@ -135,17 +134,17 @@ public class Rechner1 extends JFrame {
 		// Ende Komponenten
       add (simple);
 		setVisible(true);
-	} // end of public Rechner2
+	} // end of public Advanced
 
 	// Anfang Methoden
 
 	public static void main(String[] args) {
-		new Rechner2();
+		new Advanced();
 	} // end of main
 
 	public void responseFunktion(String ergebnisB) {
 
-		JOptionPane.showMessageDialog(Rechner1.this, "Ergebnis: " + ergebnisB, "Berechnung",
+		JOptionPane.showMessageDialog(Simple.this, "Ergebnis: " + ergebnisB, "Berechnung",
 				JOptionPane.INFORMATION_MESSAGE);
 
 	}
@@ -268,5 +267,5 @@ public class Rechner1 extends JFrame {
 	}
 		
 		// Ende Methoden
-} // end of class Rechner1
+} // end of class Simple
 

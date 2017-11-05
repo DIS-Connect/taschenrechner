@@ -1,7 +1,7 @@
 
 public class Bedinung {
 
-	Rechner1 Rechner1 = new Rechner1();
-	Rechner2 Rechner2  = new Rechner2();
+	Simple Simple = new Simple();
+	Advanced Rechner2  = new Advanced();
 	
 }
