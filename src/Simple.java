@@ -42,7 +42,7 @@ public class Simple extends JFrame {
 		int x = (d.width - getSize().width) / 2;
 		int y = (d.height - getSize().height) / 2;
 		setLocation(x, y);
-		setTitle("Advanced");
+		setTitle("Simple Calculator");
 		setResizable(false);
 	
 		simple.setLayout(null);
@@ -139,7 +139,7 @@ public class Simple extends JFrame {
 	// Anfang Methoden
 
 	public static void main(String[] args) {
-		new Advanced();
+		new Simple();
 	} // end of main
 
 	public void responseFunktion(String ergebnisB) {
