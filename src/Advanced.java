@@ -15,16 +15,12 @@ public class Advanced extends JFrame {
 	private JButton hoch = new JButton();
 	private JButton malKnopf = new JButton();
 	private JButton teilKnopf = new JButton();
-	private boolean plus;
-	private boolean minus;
-	private boolean mal;
-	private boolean teil;
-	private boolean hi;
+	private int status; // 0=+, 1=- 2=*, 3=/ 4=^, 5=root
 	private JRadioButton keepInput = new JRadioButton();
-    private JRadioButton keepNothing = new JRadioButton();
+	private JRadioButton keepNothing = new JRadioButton();
 	private JRadioButton keepresult2 = new JRadioButton();
-    private JRadioButton keepresult1 = new JRadioButton();
-    private ButtonGroup keepRadioGroup = new ButtonGroup();
+	private JRadioButton keepresult1 = new JRadioButton();
+	private ButtonGroup keepRadioGroup = new ButtonGroup();
 	private JButton wurzelKnopf = new JButton();
 	private boolean wurzel;
 	private JRadioButton keepresult = new JRadioButton();
@@ -44,7 +40,7 @@ public class Advanced extends JFrame {
 		setLocation(x, y);
 		setTitle("Advanced");
 		setResizable(false);
-	
+
 		advanced.setLayout(null);
 		// Anfang Komponenten
 
@@ -62,6 +58,7 @@ public class Advanced extends JFrame {
 		ergebnisKnopf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				ergebnis_ActionPerformed(evt);
+
 			}
 		});
 		ergebnisKnopf.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -72,7 +69,8 @@ public class Advanced extends JFrame {
 		plusKnopf.setMargin(new Insets(2, 2, 2, 2));
 		plusKnopf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				plusKnopf_ActionPerformed(evt);
+				status = 0;
+				setOperator();
 			}
 		});
 		plusKnopf.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -83,7 +81,8 @@ public class Advanced extends JFrame {
 		minusKnopf.setMargin(new Insets(2, 2, 2, 2));
 		minusKnopf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				minusKnopf_ActionPerformed(evt);
+				status = 1;
+				setOperator();
 			}
 		});
 		minusKnopf.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -93,7 +92,8 @@ public class Advanced extends JFrame {
 		malKnopf.setMargin(new Insets(2, 2, 2, 2));
 		malKnopf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				malKnopf_ActionPerformed(evt);
+				status = 2;
+				setOperator();
 			}
 		});
 		malKnopf.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -104,7 +104,8 @@ public class Advanced extends JFrame {
 		teilKnopf.setMargin(new Insets(2, 2, 2, 2));
 		teilKnopf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				teilKnopf_ActionPerformed(evt);
+				status = 3;
+				setOperator();
 			}
 		});
 		teilKnopf.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -114,7 +115,8 @@ public class Advanced extends JFrame {
 		hoch.setMargin(new Insets(2, 2, 2, 2));
 		hoch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				hoch_ActionPerformed(evt);
+				status = 4;
+				setOperator();
 			}
 		});
 		hoch.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -126,50 +128,50 @@ public class Advanced extends JFrame {
 		wurzelKnopf.setMargin(new Insets(2, 2, 2, 2));
 		wurzelKnopf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				wurzelKnopf_ActionPerformed(evt);
-
+				status = 5;
+				setOperator();
 			}
 		});
 		keepresult2.setBounds(350, 125, 180, 25);
 		keepresult2.setOpaque(false);
 		keepresult2.setText("keep result in field 2");
-        keepresult2.setActionCommand("2");
-	    advanced.add(keepresult2);
-        keepRadioGroup.add(keepresult2);
-        
-        keepresult1.setBounds(350, 100, 180, 25);
-	    keepresult1.setOpaque(false);
-	    keepresult1.setText("keep result in field 1");
-        keepresult1.setActionCommand("1");
-        keepRadioGroup.add(keepresult1);
-	    advanced.add(keepresult1);
+		keepresult2.setActionCommand("2");
+		advanced.add(keepresult2);
+		keepRadioGroup.add(keepresult2);
+
+		keepresult1.setBounds(350, 100, 180, 25);
+		keepresult1.setOpaque(false);
+		keepresult1.setText("keep result in field 1");
+		keepresult1.setActionCommand("1");
+		keepRadioGroup.add(keepresult1);
+		advanced.add(keepresult1);
 		wurzelKnopf.setFont(new Font("Dialog", Font.BOLD, 18));
 		advanced.add(wurzelKnopf);
-		
-		keepInput.setBounds(350, 50, 180, 25);
-	    keepInput.setOpaque(false);
-        keepInput.setActionCommand("keep Input");
-	    keepInput.setText("keep input");
-	    advanced.add(keepInput);
-        keepRadioGroup.add(keepInput);
 
-        keepNothing.setBounds(350, 75, 180, 25);
-        keepNothing.setOpaque(false);
-        keepNothing.setActionCommand("3");
-        keepNothing.setText("keep nothing");
-        keepNothing.setSelected(true);
-        advanced.add(keepNothing);
-        keepRadioGroup.add(keepNothing);
-        
-        keepresult.setBounds(350, 150, 180, 25);
-        keepresult.setOpaque(false);
-        keepresult.setActionCommand("4");
-        keepresult.setText("keep result");
-        keepresult.setSelected(true);
-        advanced.add(keepresult);
-        keepRadioGroup.add(keepresult);
-        
-         ergebnisFeld.setBounds(350, 175, 90, 40);
+		keepInput.setBounds(350, 50, 180, 25);
+		keepInput.setOpaque(false);
+		keepInput.setActionCommand("keep Input");
+		keepInput.setText("keep input");
+		advanced.add(keepInput);
+		keepRadioGroup.add(keepInput);
+
+		keepNothing.setBounds(350, 75, 180, 25);
+		keepNothing.setOpaque(false);
+		keepNothing.setActionCommand("3");
+		keepNothing.setText("keep nothing");
+		keepNothing.setSelected(true);
+		advanced.add(keepNothing);
+		keepRadioGroup.add(keepNothing);
+
+		keepresult.setBounds(350, 150, 180, 25);
+		keepresult.setOpaque(false);
+		keepresult.setActionCommand("4");
+		keepresult.setText("keep result");
+		keepresult.setSelected(true);
+		advanced.add(keepresult);
+		keepRadioGroup.add(keepresult);
+
+		ergebnisFeld.setBounds(350, 175, 90, 40);
 		advanced.add(ergebnisFeld);
 		// Ende Komponenten
 
@@ -196,69 +198,29 @@ public class Advanced extends JFrame {
 		return operator;
 	}
 
-	public void setOperator(JLabel operator) {
-		this.operator = operator;
-	}
-
-	public void plusKnopf_ActionPerformed(ActionEvent evt) {
-		operator.setText("+");
-		plus = true;
-		minus = false;
-		wurzel = false;
-		mal = false;
-		teil = false;
-		hi = false;
-	} // end of plusKnopf_ActionPerformed
-
-	public void minusKnopf_ActionPerformed(ActionEvent evt) {
-		operator.setText("-");
-		minus = true;
-		plus = false;
-		mal = false;
-		teil = false;
-		hi = false;
-		wurzel = false;
-	} // end of minusKnopf_ActionPerformed
-
-	public void malKnopf_ActionPerformed(ActionEvent evt) {
-		operator.setText("X");
-		mal = true;
-		plus = false;
-		minus = false;
-		teil = false;
-		hi = false;
-		wurzel = false;
-	} // end of malKnopf_ActionPerformed
-
-	public void teilKnopf_ActionPerformed(ActionEvent evt) {
-		operator.setText("/");
-		teil = true;
-		plus = false;
-		minus = false;
-		mal = false;
-		hi = false;
-		wurzel = false;
-	}
-
-	public void hoch_ActionPerformed(ActionEvent evt) {
-		operator.setText("^");
-		teil = false;
-		plus = false;
-		minus = false;
-		mal = false;
-		hi = true;
-		wurzel = false;
-	}// end of teilKnopf_ActionPerformed
-
-	public void wurzelKnopf_ActionPerformed(ActionEvent evt) {
-		operator.setText("âˆš");
-		teil = false;
-		plus = false;
-		minus = false;
-		mal = false;
-		hi = false;
-		wurzel = true;
-
+	public void setOperator() {
+		switch (status) {
+		case 0:
+			operator.setText("+");
+			break;
+		case 1:
+			operator.setText("-");
+			break;
+		case 2:
+			operator.setText("X");
+			break;
+		case 3:
+			operator.setText("/");
+			break;
+		case 4:
+			operator.setText("^");
+			break;
+		case 5:
+			operator.setText("root");
+			break;
+		default:
+			operator.setText("");
+		}
 	}
 
 	public void ergebnis_ActionPerformed(ActionEvent evt) {
@@ -268,64 +230,56 @@ public class Advanced extends JFrame {
 
 		op1 = Double.parseDouble(fOperant1.getText());
 		op2 = Double.parseDouble(fOperant2.getText());
-		if ( plus ) {
 
+		switch (status) {
+		case 0:
 			ergebnisZ = op1 + op2;
-			responseFunktion(Double.toString(ergebnisZ));
-		} else if ( minus ) {
+			break;
+		case 1:
 			ergebnisZ = op1 - op2;
-			responseFunktion(Double.toString(ergebnisZ));
-		} else if ( teil ) {
-			if ( !(Double.parseDouble(fOperant2.getText()) == 0) ) {
-				ergebnisZ = op1 / op2;
-				responseFunktion(Double.toString(ergebnisZ));
-			} else if ( (Double.parseDouble(fOperant2.getText()) == 0) ) {
-				responseFunktion("Stell dir vor, du hast " + fOperant1.getText() + " Kekse und verteile sie gleichmäßig auf " + fOperant2.getText() + " Freunde. Wie viele Kekse bekommt jeder? Siehst du? Das macht keinen Sinn! Und du bist traurig weil du keine Freunde hast");
+			break;
+		case 2:
+			ergebnisZ = op1 * op2;
+			break;
+		case 3:
+			if(op2==0) {
+			responseFunktion("Stell dir vor, du hast " +(op1==1?"einen":op1)+ " Keks"+(op1==1?"":"e")+" und verteilst "+(op1==1?"ihn":"sie")+" gleichmäßig auf " + fOperant2.getText() +
+					" Freunde. Wie viele Kekse bekommt jeder? Siehst du? Das macht keinen Sinn! Und du bist traurig weil du keine Freunde hast!");
 			}
-		} else if ( mal ) {
-			if ( !(Double.parseDouble(fOperant1.getText()) == 0 || Double.parseDouble(fOperant2.getText()) == 0) )
-				ergebnisZ = op1 * op2;
-			responseFunktion(Double.toString(ergebnisZ));
-
-		} else if ( hi ) {
+			ergebnisZ = op1 / op2;
+			break;
+		case 4:
 			ergebnisZ = Math.pow(op1, op2);
-			responseFunktion(Double.toString(ergebnisZ));
-		} else if ( wurzel ) {
-
-			if ( op1 == 2 ) {
-
-				ergebnisZ = Math.sqrt(op2);
-				responseFunktion(Double.toString(ergebnisZ));
-			} else if ( op1 == 3 ) {
-
-				ergebnisZ = Math.cbrt(op2);
-				responseFunktion(Double.toString(ergebnisZ));
-
-			}
+			break;
+		case 5:
+			ergebnisZ = Math.pow(op1, 1 / op2);
+			break;
+		default:
 
 		}
-        if (keepRadioGroup.getSelection().getActionCommand() == "1") {
-            fOperant1.setText(Double.toString(ergebnisZ));
-            System.out.println(Double.toString(ergebnisZ));
-            fOperant2.setText("");
-            operator.setText("");
-        } else if (keepRadioGroup.getSelection().getActionCommand() == "2") {
-            fOperant2.setText(Double.toString(ergebnisZ));
-            fOperant1.setText("");
-            operator.setText("");
-        } else if ((keepRadioGroup.getSelection().getActionCommand() == "3")) {
-            fOperant1.setText("");
-            fOperant2.setText("");
-            operator.setText("");
-        }
-        else if ((keepRadioGroup.getSelection().getActionCommand() == "4")) {
-        	
-        	ergebnisFeld.setText(Double.toString(ergebnisZ));
-        	fOperant1.setText("");
-            fOperant2.setText("");
-            operator.setText("");
-        }
+		responseFunktion(Double.toString(ergebnisZ));
+
+		if (keepRadioGroup.getSelection().getActionCommand() == "1") {
+			fOperant1.setText(Double.toString(ergebnisZ));
+			System.out.println(Double.toString(ergebnisZ));
+			fOperant2.setText("");
+			operator.setText("");
+		} else if (keepRadioGroup.getSelection().getActionCommand() == "2") {
+			fOperant2.setText(Double.toString(ergebnisZ));
+			fOperant1.setText("");
+			operator.setText("");
+		} else if ((keepRadioGroup.getSelection().getActionCommand() == "3")) {
+			fOperant1.setText("");
+			fOperant2.setText("");
+			operator.setText("");
+		} else if ((keepRadioGroup.getSelection().getActionCommand() == "4")) {
+
+			ergebnisFeld.setText(Double.toString(ergebnisZ));
+			fOperant1.setText("");
+			fOperant2.setText("");
+			operator.setText("");
+		}
 	}
-		
-		// Ende Methoden
+
+	// Ende Methoden
 } // end of class Advanced
